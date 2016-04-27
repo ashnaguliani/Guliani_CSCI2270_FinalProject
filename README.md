@@ -38,4 +38,4 @@ Soham Shah, Sean Harrison, Madison Yost, Aaron Pineda, Alex Bertman
 
 Open issues/bugs
 
-There is a section currently commented out in case 5 of the main file because the rebalancing function does not work as planned. When the section is uncommented and the rebalancing function is used, the team that is rebalanced is somehow deleted from the linked list. 
+Any enhancements to the code would be appreciated
