@@ -94,21 +94,19 @@ void LeagueTable::rebalance(string team){
     current->prev->next = current->next;
     current->next->prev = current->prev;
 
-    current->prev = temp->prev;
-    temp->prev = current;
-    cout << temp->prev->name << endl;
     if(temp->prev != NULL)
     {
         temp->prev->next = current;
     }
     current->next = temp;
-    cout << current->next->name << endl;
     if(temp->prev == NULL)
     {
         current->prev = NULL;
         head = current;
     }
 
+    current->prev = temp->prev;
+    temp->prev = current;
 
 }
 
