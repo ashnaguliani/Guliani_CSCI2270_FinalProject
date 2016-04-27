@@ -14,29 +14,29 @@ LeagueTable::~LeagueTable()
 {
     deleteTable();
 }
-void LeagueTable::addClub(string previousClub, string name, int points, int GP){
-    if(previousClub == "First")
+void LeagueTable::addClub(string previousClub, string name, int points, int GP){ //adds a new club to the table
+    if(previousClub == "First") //if team to be added is first in the linked list
     {
         club*c = new club(name, 0, points, head, NULL);
         head = c;
     }else{
-        club * tmp = head;
-        while(tmp->name != previousClub && tmp->next != NULL)
+        club * temp = head;
+        while(temp->name != previousClub && temp->next != NULL)
         {
-            tmp = tmp->next;
+            temp = temp->next;
         }
-        club * newClub = new club(name, 0, points, tmp->next, tmp);
-        tmp->next = newClub;
+        club * newClub = new club(name, 0, points, temp->next, temp);
+        temp->next = newClub;
     }
 }
-void LeagueTable::deleteClub(string nameIn){
+void LeagueTable::deleteClub(string name){ //delete a club from the standings
     club *delClub = NULL;
     club *searchClub = head;
 
     bool found = false;
 
     while(!found and searchClub != NULL){
-        if(searchClub->name == nameIn){
+        if(searchClub->name == name){
             found = true;
         }else{
             searchClub = searchClub->next;
@@ -54,25 +54,25 @@ void LeagueTable::deleteClub(string nameIn){
             delete searchClub;
         }
     }else{
-        cout<<nameIn<<"not found"<<endl;
+        cout<<name<<"not found"<<endl;
     }
 
 }
 void LeagueTable::deleteTable(){
-    club * tmp;
+    club * temp;
 
     while (head != NULL)
     {
-        tmp = head;
+        temp = head;
         head = head->next;
-        cout<<"deleting "<<tmp->name<<endl;
-        delete tmp;
+        cout<<"deleting "<<temp->name<<endl;
+        delete temp;
     }
 }
 
 void LeagueTable::rebalance(string team){
     club *current = head;
-    while(current != NULL)
+    while(current != NULL) //find the current team in the linked list
     {
         if(current->name == team)
         {
@@ -81,11 +81,40 @@ void LeagueTable::rebalance(string team){
         current = current->next;
     }
 
+    club *temp = current->prev;
+    while(temp->prev != NULL) //find the team that current team will be just above (equal or behind on points)
+    {
+        if(temp->points > current->points)
+        {
+            break;
+        }
+        temp = temp->prev;
+    }
+
+    current->prev->next = current->next;
+    current->next->prev = current->prev;
+
+    current->prev = temp->prev;
+    temp->prev = current;
+    cout << temp->prev->name << endl;
+    if(temp->prev != NULL)
+    {
+        temp->prev->next = current;
+    }
+    current->next = temp;
+    cout << current->next->name << endl;
+    if(temp->prev == NULL)
+    {
+        current->prev = NULL;
+        head = current;
+    }
+
+
 }
 
-void LeagueTable::buildTable(){
+void LeagueTable::buildTable(){ //create the table based on teams added
     string EPL16[20] = {"AFC Bournemouth", "Arsenal", "Aston Villa", "Chelsea", "Crystal Palace", "Everton", "Leicester City", "Liverpool", "Manchester City", "Manchester United", "Newcastle United", "Norwich City", "Southampton", "Stoke City", "Sunderland", "Swansea City", "Tottenham Hotspur", "Watford", "West Bromwich Albion", "West Ham United"};
-    club *clubAdded;
+    club *clubAdded; //EPL16 is an array of current teams in the 2016 English League, but can be replaced with any other teams
     club *currentClub;
 
     for(int i = 0; i < 20; i++){
@@ -99,19 +128,19 @@ void LeagueTable::buildTable(){
             currentClub = clubAdded;
         }
     }
-    tail = currentClub;
+    tail = currentClub; //last club added is the tail
 }
 
 
 void LeagueTable::enterScore(string winner, int winningGoals, string loser, int losingGoals){
     club *temp = head;
     club *temp2 = head;
-    if(winningGoals < losingGoals)
+    if(winningGoals < losingGoals) //if the losing team has more goals, input is invalid
     {
         cout << "Invalid Input" << endl;
     }else
     {
-        while(temp != NULL)
+        while(temp != NULL) //find the winning team in the linked list
         {
             if(temp->name == winner)
             {
@@ -119,7 +148,7 @@ void LeagueTable::enterScore(string winner, int winningGoals, string loser, int 
             }
             temp = temp->next;
         }
-        while(temp2 != NULL)
+        while(temp2 != NULL) //find the losing team in the linked list
         {
             if(temp2->name == loser)
             {
@@ -129,18 +158,18 @@ void LeagueTable::enterScore(string winner, int winningGoals, string loser, int 
         }
         temp->GP = (temp->GP + 1); //both increase games played regardless of outcome
         temp2->GP = (temp2->GP +1);
-        if(winningGoals == losingGoals) //tie - each team gets 1 pt
+        if(winningGoals == losingGoals) //in the case of a tie each team gets 1 point
         {
             temp->points = (temp->points + 1);
             temp2->points = (temp2->points + 1);
-        }else //winning team gets three points
+        }else //winning team gets 3 points, losing teams gets 0
         {
             temp->points = (temp->points + 3);
         }
     }
 }
 
-void LeagueTable::printPointsTable(){
+void LeagueTable::printPointsTable(){ //prints a table with each team and their # of points
 cout << "==================" << endl;
     club *current = head;
     int place = 1;
@@ -152,7 +181,7 @@ cout << "==================" << endl;
     }
 }
 
-void LeagueTable::printGPTable(){
+void LeagueTable::printGPTable(){ //prints each team and their # of games played
     cout << "==================" << endl;
     club *current = head;
     int place = 1;
@@ -164,7 +193,7 @@ void LeagueTable::printGPTable(){
     }
 }
 
-void LeagueTable::printAllTable(){
+void LeagueTable::printAllTable(){ //prints a table with all of each team's statistics
     cout << "==================" << endl;
     club *current = head;
     int place = 1;
@@ -176,7 +205,7 @@ void LeagueTable::printAllTable(){
     }
 }
 
-void LeagueTable::printStandings(){
+void LeagueTable::printStandings(){ //prints only teams standings
     cout << "==================" << endl;
     club *current = head;
     int place = 1;
