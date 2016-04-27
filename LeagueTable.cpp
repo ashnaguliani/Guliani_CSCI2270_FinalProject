@@ -80,6 +80,7 @@ void LeagueTable::rebalance(string team){
         }
         current = current->next;
     }
+
 }
 
 void LeagueTable::buildTable(){
