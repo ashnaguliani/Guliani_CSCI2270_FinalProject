@@ -84,14 +84,15 @@ int main(int argc, char* argv[])
                 losingGoals = stoi(lose);
 
                 table.enterScore(winningClub, winningGoals, losingClub, losingGoals);
-                if(winningGoals == losingGoals)
+
+                /* if(winningGoals == losingGoals)
                 {
                     table.rebalance(winningClub);
                     table.rebalance(losingClub);
                 }else if(winningGoals > losingGoals)
                 {
                     table.rebalance(winningClub);
-                }
+                } */
 
                 break;
             case 6:
