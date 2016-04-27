@@ -50,19 +50,15 @@ int main(int argc, char* argv[])
             case 1:
                 table.buildTable();
                 table.printStandings();
-
                 break;
             case 2:
                 table.printPointsTable();
-
                 break;
             case 3:
                 table.printGPTable();
-
                 break;
             case 4:
                 table.printAllTable();
-
                 break;
             case 5:
                 cout << "Enter the winning team, the number of goals they scored, the losing team, and the number of goals they scored." << endl;
@@ -85,15 +81,14 @@ int main(int argc, char* argv[])
 
                 table.enterScore(winningClub, winningGoals, losingClub, losingGoals);
 
-                /* if(winningGoals == losingGoals)
+                if(winningGoals == losingGoals)
                 {
                     table.rebalance(winningClub);
                     table.rebalance(losingClub);
                 }else if(winningGoals > losingGoals)
                 {
                     table.rebalance(winningClub);
-                } */
-
+                }
                 break;
             case 6:
                 cout << "Enter a club to add: " << endl;
@@ -111,29 +106,24 @@ int main(int argc, char* argv[])
                 getline(cin,previousClub);
 
                 table.addClub(previousClub, clubNew, newPoints, newGP);
-
                 break;
             case 7:
                 cout << "Enter a club to delete: " << endl;
                 getline(cin,club1);
 
                 table.deleteClub(club1);
-
                 break;
             case 8:
                 table.deleteTable();
-
                 break;
             case 9:
                 cout << "Goodbye!" << endl;
                 quit = true;
-
                 break;
             default:
                 cout << "Invalid Input" << endl;
                 cin.clear();
                 cin.ignore(10000,'\n');
-
                 break;
         }
     }
