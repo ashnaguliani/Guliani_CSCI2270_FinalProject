@@ -28,6 +28,8 @@ void LeagueTable::addClub(string previousClub, string name, int points, int GP){
         club * newClub = new club(name, 0, points, temp->next, temp);
         temp->next = newClub;
     }
+    // Rebalance the list after adding a club to keep ordering by points.
+    rebalance(name);
 }
 void LeagueTable::deleteClub(string name){ //delete a club from the standings
     club *delClub = NULL;
