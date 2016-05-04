@@ -117,6 +117,11 @@ int main(int argc, char* argv[])
                 table.deleteTable();
                 break;
             case 9:
+                cout<<"Enter name of team: ";
+                getline(cin,club1);
+                table.findTeam(club1);
+                break;
+            case 10:
                 cout << "Goodbye!" << endl;
                 quit = true;
                 break;
@@ -141,6 +146,7 @@ void displayMenu()
     cout << "6. Add Club" << endl;
     cout << "7. Delete Club" << endl;
     cout << "8. Clear Table" << endl;
-    cout << "9. Quit" << endl;
+    cout << "9. Search Team" <<endl;
+    cout << "10. Quit" << endl;
     return;
 }

@@ -214,3 +214,27 @@ void LeagueTable::printStandings(){ //prints only teams standings
         place = place+1;
     }
 }
+
+void LeagueTable::findTeam(string fname)
+{
+    cout << "==================" << endl;
+    club *current = head;
+    club *findc=NULL;
+    int place = 1;
+    while (current != NULL)
+    {
+        if(current->name.compare(fname)==0)
+        {
+            findc=current;
+        }
+        current=current->next;
+        if(findc==NULL)
+        {
+            place = place+1;
+        }
+    }
+    if(findc!=NULL)
+    {
+        cout << place <<". " << findc->name << " - Games Played : " << findc->GP << " - Points: " << findc->points <<endl;
+    }
+}

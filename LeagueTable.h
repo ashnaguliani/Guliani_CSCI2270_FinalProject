@@ -37,6 +37,7 @@ class LeagueTable
         void deleteClub(std::string); //delete a club from the standings
         void deleteTable(); //delete the entire table
         void rebalance(std::string); //rebalance the table after a score is added in
+        void findTeam(std::string);
     protected:
     private:
         club *head;
