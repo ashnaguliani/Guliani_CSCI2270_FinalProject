@@ -28,8 +28,7 @@ Ashna Guliani
 
 Contributors
 
-Soham Shah, Sean Harrison, Aaron Pineda, Alex Bertman
-Friedrich Amouzou, Brandon Bell
+Soham Shah, Sean Harrison, Aaron Pineda, Alex Bertman, Friedrich Amouzou, Brandon Bell
 
 
 Open issues/bugs
