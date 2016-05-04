@@ -237,4 +237,8 @@ void LeagueTable::findTeam(string fname)
     {
         cout << place <<". " << findc->name << " - Games Played : " << findc->GP << " - Points: " << findc->points <<endl;
     }
+    else
+    {
+      cout<<"Team not found"<<endl;
+    }
 }
